@@ -1,0 +1,54 @@
+<v-layout row wrap class="data-listing min-width-0">
+  <v-toolbar color="white elevation-0" height="56" class="mb-3" v-if="!hideToolbar">
+    <v-toolbar-items :class="{'ml-3': sm}" class="mr-3" v-if="selectAll">
+      <v-checkbox color="primary" :input-value="selectedItems.length" :indeterminate="(selectedItems.length < dataSet.length) && selectedItems.length !== 0" hide-details @click.native="toggleAll" class="pt-2"></v-checkbox>
+    </v-toolbar-items>
+    <template v-if="bulkActions && selectedItems.length">
+      <v-btn icon v-for="(action, index) of bulkActions" :key="index">
+        <v-icon icon class="grey--text">{{ action.icon }}</v-icon>
+      </v-btn>
+    </template>
+    <v-text-field flat solo prepend-icon="search" :label="$t('search')" class="hidden-sm-and-down" v-model.trim="keyword" @input="keySearch"></v-text-field>
+    <v-spacer></v-spacer>
+    <template v-if="changeView">
+      <v-btn icon @click="switchView">
+        <v-icon class="grey--text">{{ viewIcon }}</v-icon>
+      </v-btn>
+    </template>
+    <v-btn v-if="customBtn" @click="$emit(customBtn.event)" :color="customBtn.color">{{customBtn.text}}</v-btn>
+    <v-toolbar-items class="sort-wrapper align-center px-3">
+      <span class="sort-label">{{ $t('sort-by') }}:</span>
+      <v-menu origin="center" transition="scale-transition" bottom>
+        <span class="ml-2 d-flex align-center sort-select" slot="activator">{{ selected }}
+          <v-icon>arrow_drop_down</v-icon>
+        </span>
+        <v-list>
+          <v-list-tile v-for="(item, i) of sortItems" :key="i" @click="sort(item)">
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+    </v-toolbar-items>
+    <v-btn icon @click="toggleDir">
+      <v-icon :class="{'sort-rotate': sortDir === 'desc'}">arrow_upward</v-icon>
+    </v-btn>
+  </v-toolbar>
+  <template v-if="type === 'table'">
+    <v-flex xs12>
+      <v-text-field v-model.trim="keyword" prepend-icon="search" label="Search" @input="keySearch" flat solo single-line hide-details></v-text-field>
+    </v-flex>
+    <v-data-table :headers="headers" :items="dataSet" :total-items="totalItems" :pagination.sync="pagination" :loading="loading" class="flex sx12">
+      <template slot="items" slot-scope="props">
+        <slot :item="props.item"></slot>
+      </template>
+    </v-data-table>
+  </template>
+  <template v-else>
+    <v-data-iterator class="flex min-width-0" content-tag="v-layout" :items="dataSet" v-if="!hasData" row wrap :total-items="totalItems" :pagination.sync="pagination">
+      <template slot="item" slot-scope="props">
+        <slot :item="props.item"></slot>
+      </template>
+    </v-data-iterator>
+    <v-progress-circular indeterminate v-else :size="100" color="primary" class="mx-auto"></v-progress-circular>
+  </template>
+</v-layout>

@@ -1,0 +1,122 @@
+<div class="dynamic_form">
+    <v-form :action="formData.action" :method="formData.method" ref="form" id="form" v-model="valid" lazy-validation>
+        <v-layout v-for="(section, sindex) in formData.controls" :key="sindex" >
+            <v-flex>
+                <v-toolbar-title>{{formData.title}}</v-toolbar-title>
+                <v-container fluid class="" pa-0>
+                    <v-card class="elevation-0">
+                        <div v-for="(field, findex) in section.controls" :key="findex" class="fieldBlock" row>
+                            <div class="field_label" v-if="field.ui.flow==2" xs4>
+                                <h3>{{field.ui.label}}</h3>
+                            </div>
+                            <div v-if="formData.labelFields" class="xs12">
+                                <h3>{{field.ui.label}}</h3>
+                                <h4>{{field.ui.desc.txt}}</h4>
+                            </div>
+                            <div :class="field.ui.flow==2 ? 'xs8': 'xs12'">
+                                <v-select v-if="field.type=='dropdown'"
+                                    v-on:input="changeDropdown(field.data.dependent_key, sindex, 'coutry', field.data.type, field.data.url,$event)"
+                                    v-model="field.value"
+                                    :label="field.ui.placeholder"
+                                    :items="field.data.src"
+                                    item-text="label"
+                                    item-value="value"
+                                    :autocomplete="field.ui.autocomplete"
+                                    :error-messages="errors.collect(field.name)"
+                                    :data-vv-name="field.name"
+                                    v-validate="field.validations">
+                                </v-select>
+                                <!-- checkbox-->
+                                <v-flex v-else-if="field.type=='multipleChoice' && field.multiple">
+                                    <v-checkbox
+                                    v-for="(checkbox, cindex) in field.data.src" :key="cindex"
+                                    v-model="field.name"
+                                    :label="checkbox.label"
+                                    :value="checkbox.value"
+                                    color="primary"
+                                    :error-messages="errors.collect(field.name)"
+                                    :data-vv-name="field.name"
+                                    v-validate="field.validations"
+                                    hide-details>
+                                    </v-checkbox>
+                                </v-flex>
+                                <!-- radio -->
+                                <v-radio-group v-else-if="field.type=='multipleChoice' && !field.multiple" v-model="field.name" row>
+                                    <v-flex v-for="(radio, rindex) in field.data.src" :key="rindex">
+                                        <v-radio 
+                                        :label="radio.label"
+                                        :name="field.name"
+                                        :value="radio.value"
+                                        color="primary"
+                                        :error-messages="errors.collect(field.name)"
+                                        :data-vv-name="field.name"
+                                        v-validate="field.validations"
+                                        hide-details>
+                                        </v-radio>
+                                    </v-flex>
+                                </v-radio-group>
+
+                                <v-flex v-else-if="field.type=='date'">
+                                    <v-menu
+                                        :ref="menu"
+                                        lazy
+                                        :close-on-content-click="false"
+                                        v-model="menu"
+                                        transition="scale-transition"
+                                        offset-y
+                                        full-width
+                                        :nudge-right="40"
+                                        min-width="290px"
+                                        :return-value.sync="field.value"
+                                    >
+                                        <v-text-field
+                                        slot="activator"
+                                        label="Pick a date"
+                                        v-model="field.value"
+                                        prepend-icon="event"
+                                        readonly
+                                        ></v-text-field>
+                                        <v-date-picker v-model="field.value" scrollable>
+                                        <v-spacer></v-spacer>
+                                        <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+                                        <v-btn flat color="primary" @click="$refs.menu.save(field.value)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-flex>
+
+                                <v-text-field v-else-if="field.type=='longText'"
+                                    v-model="field.value"
+                                    :name="field.name"
+                                    :label="field.ui.lable"
+                                    :id="field.name"
+                                    :type="field.type"
+                                    :placeholder="field.ui.placeholder"
+                                    :error-messages="errors.collect(field.name)"
+                                    :data-vv-name="field.name"
+                                    v-validate="field.validations"
+                                    multi-line>
+                                </v-text-field>
+
+                                <v-text-field v-else
+                                    v-model="field.value"
+                                    :name="field.name"
+                                    :label="field.ui.lable"
+                                    :id="field.name"
+                                    :type="field.type"
+                                    :placeholder="field.ui.placeholder"
+                                    :error-messages="errors.collect(field.name)"
+                                    :data-vv-name="field.name"
+                                    v-validate="field.validations">
+                                </v-text-field>
+                            </div>
+                        </div>
+                    </v-card>
+                </v-container>
+            </v-flex>
+        </v-layout>
+        <div v-if="!demo">
+            <v-btn @click="submit()" :disabled="!valid" class="primary">submit</v-btn>
+            <v-btn @click="clear">clear</v-btn>
+        </div>
+    </v-form>
+</div>

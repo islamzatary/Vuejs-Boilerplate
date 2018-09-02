@@ -1,0 +1,11 @@
+<v-dialog v-model="value" persistent :max-width="maxWidth">
+  <v-card>
+    <v-card-title class="headline">{{ title }}</v-card-title>
+    <v-card-text class="grey--text">{{ text }}</v-card-text>
+    <v-card-actions class="pa-4">
+      <v-spacer></v-spacer>
+      <v-btn flat class="primary--text" @click.native="closeDialog">{{ falseBtnText }}</v-btn>
+      <v-btn :color="trueBtnColor" @click="onSuccess">{{ trueBtnText }}</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
