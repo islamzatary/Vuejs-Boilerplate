@@ -9,7 +9,7 @@ https://github.com/islamzatary/Vuejs-Boilerplate
 ``` bash
 $ npm install -g vue-cli
 $ git clone https://github.com/islamzatary/Vuejs-Boilerplate
-$ cd vues
+$ cd Vuejs-Boilerplate
 $ npm install
 $ npm run dev
 ```

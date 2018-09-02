@@ -1,27 +1,21 @@
-# vue
+# Vuejs-Boilerplate.
 
-> A Vue.js project
+> This is a Boilerplate based on VueJS Framework.
+
+Check [Demo](http://islamzatary.com/projects/VueJS-Boilerplate/)
+
+Check Documentation(https://islamzatary.github.io/Vuejs-Boilerplate/#/)
+
+Check the complete article on [Medium](https://medium.com/@islamzatary/a-summary-of-front-end-architecture-built-by-vuejs-57d2bbb0b66)
+
+
 
 ## Build Setup
 
 ``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+$ npm install -g vue-cli
+$ git clone https://github.com/islamzatary/Vuejs-Boilerplate
+$ cd Vuejs-Boilerplate
+$ npm install
+$ npm run dev
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
