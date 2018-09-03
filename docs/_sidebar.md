@@ -12,6 +12,6 @@
 - [Build Commands](/commands)
 - [Form validation](/validation)
 - [API](/api)
-- [SSR](/pptr)
+- [PPTR](/pptr)
 - [What should you learn](/should-learn)
 - [Why Vuejs & Resources](/why-vuejs)

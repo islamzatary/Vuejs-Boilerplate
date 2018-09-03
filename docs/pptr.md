@@ -1,8 +1,8 @@
-# SSR
+# PPTR
 
-<h2> I am using [Puppeteer](https://pptr.dev/) as a Server side rendering</h2>
-
-i use it for screenshots and generate PDF file, the good part in PPTR is using the Chrome/Chromium headless.
+<h3> We are using [Puppeteer](https://pptr.dev/).
+for screenshots and generate PDF file, the good part in PPTR is using the Chrome/Chromium headless.
+</h3>
 
 check PPTR [features](https://developers.google.com/web/tools/puppeteer/)
 

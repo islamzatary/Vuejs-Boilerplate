@@ -3,6 +3,7 @@
   * [Dynamic Forms](/components/dynamic-form)
   * [Data listings](/components/data-listings)
   * [Charts](/components/charts)
+  * [Confirmation](/components/confirmation)
 
 
 
