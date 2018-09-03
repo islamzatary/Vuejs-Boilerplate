@@ -8,8 +8,8 @@ module.exports = {
   dev: {
 
     // Paths
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsSubDirectory: '/en/projects/VueJS-Boilerplate/static',
+    assetsPublicPath: '/en/projects/VueJS-Boilerplate/',
     proxyTable: {},
 
     // Various Dev Server settings
