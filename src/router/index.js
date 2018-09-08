@@ -9,6 +9,7 @@ import Charts from '@/pages/Charts';
 import ListingCards from '@/pages/Listing-cards';
 import ListingTable from '@/pages/Listing-table';
 import Login from '@/pages/Login';
+import Register from '@/pages/Register';
 import Form from '@/pages/Form';
 import Page404 from '@/pages/Page404';
 import Page500 from '@/pages/Page500';
@@ -70,6 +71,14 @@ export const router = new Router({
           }
         },
         {
+          path: 'register',
+          name: 'register',
+          component: Register,
+          meta: {
+            layout: 'simple-layout'
+          }
+        },
+        {
           path: 'form',
           name: 'form',
           component: Form,
@@ -96,6 +105,7 @@ export const router = new Router({
       ]
     }
   ],
+  base: process.env.ROUTER_BASE,
   mode: 'history'
 });
 
